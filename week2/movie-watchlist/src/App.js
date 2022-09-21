@@ -33,7 +33,6 @@ function App() {
   useEffect(() => {
     getData();
   }, [page]);
-
   return (
     <div className="App">
       <Header />
