@@ -1,27 +1,31 @@
-import React, {useEffect} from "react";
-import AdBanner from "./AdBanner";
-import axios from "axios";
+import React, {useEffect, useState} from 'react'
+import AdBanner from './AdBanner'
+import RecipeContainer from './RecipeContainer'
+import axios from 'axios'
 
 const HomeScreen = () => {
-  const url = "https://recipes.devmountain.com";
+  const [recipes, setRecipes] = useState([])
+  const url = 'https://recipes.devmountain.com'
 
   const getRecipes = () => {
-    axios.get(`${url}/recipes`).then((res) => {
-
-      console.log(res.data);
-    });
-  };
+    axios
+      .get(`${url}/recipes`)
+      .then((res) => {
+        setRecipes(res.data)
+        console.log(res.data)
+      })
+  }
 
   useEffect(() => {
-    getRecipes();
-  }, []);
-
+    getRecipes()
+  },[])
+  
   return (
     <div>
       <AdBanner />
-      {/* Much code from Part 2 will be placed around here. Do your best! */}
+      <RecipeContainer recipes={recipes}/>
     </div>
-  );
-};
+  )
+}
 
-export default HomeScreen;
+export default HomeScreen
